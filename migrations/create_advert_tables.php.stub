@@ -1,0 +1,71 @@
+<?php
+
+/*
+ * This file is part of ibrand/advert.
+ *
+ * (c) iBrand <https://www.ibrand.cc>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateAdvertTables extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+
+        $prefix = config('ibrand.app.database.prefix', 'ibrand_');
+
+        if (!Schema::hasTable($prefix . 'advert')) {
+
+            Schema::create($prefix . 'advert', function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('code')->unique();//编码
+                $table->string('name');
+                $table->tinyInteger('status')->default(1);//状态：1 有效 ，0 失效
+                $table->timestamps();
+                $table->softDeletes();
+            });
+
+            Schema::create($prefix . 'advert_item', function (Blueprint $table) {
+                $table->increments('id');
+                $table->unsignedInteger('advert_id');//推广位id
+                $table->tinyInteger('status')->default(1);//状态：1 有效 ，0 失效
+                $table->string('name')->nullable(); //标题
+                $table->string('image')->nullable();//图片url
+                $table->string('link')->nullable();//推广位链接
+                $table->integer('sort')->default(99);//排序(越小越靠前）
+                $table->string('type')->default('default');//类型
+                $table->integer('associate_id')->nullable();//关联的类型ID：如商品ID 等
+                $table->string('associate_type')->nullable();
+                $table->text('meta')->nullable();//存储json数据格式，主要用来存储一些额外的信息，预留字段
+                $table->timestamps();
+                $table->softDeletes();
+                $table->nestedSet();
+            });
+
+        }
+
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        $prefix = config('ibrand.app.database.prefix', 'ibrand_');
+        Schema::dropIfExists($prefix.'advert_item');
+        Schema::dropIfExists($prefix.'advert');
+    }
+}
