@@ -35,4 +35,13 @@ class Advert extends Model
         parent::__construct($attributes);
     }
 
+    public function addAdvertItem(array $attributes = []){
+
+        $attributes['advert_id'] = $this->id;
+
+       return AdvertItem::create($attributes);
+
+    }
+
+
 }

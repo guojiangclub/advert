@@ -45,4 +45,15 @@ class AdvertItem extends Model
     {
         return $this->morphTo();
     }
+
+    public function addChildren(array $attributes = []){
+
+        $attributes['advert_id'] = $this->advert_id;
+
+        $attributes['parent_id'] = $this->id;
+
+        return AdvertItem::create($attributes);
+
+    }
+
 }
