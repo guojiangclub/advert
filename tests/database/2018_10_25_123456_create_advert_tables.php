@@ -39,6 +39,14 @@ class CreateAdvertTables extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+
+        Schema::create($prefix.'goods_item', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('goods_id');
+            $table->integer('item_name');
+            $table->timestamps();
+            $table->softDeletes();
+        });
     }
 
     /**

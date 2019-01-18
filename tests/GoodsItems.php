@@ -13,7 +13,7 @@ namespace iBrand\Component\Advert\Test;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Goods extends Model
+class GoodsItems extends Model
 {
     protected $guarded = ['id'];
 
@@ -28,11 +28,6 @@ class Goods extends Model
 
         $prefix = config('ibrand.app.database.prefix', 'ibrand_');
 
-        $this->setTable($prefix.'goods');
-    }
-
-    public function items()
-    {
-        return $this->hasMany(GoodsItems::class,'goods_id');
+        $this->setTable($prefix.'goods_item');
     }
 }

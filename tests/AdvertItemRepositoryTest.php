@@ -24,7 +24,11 @@ class AdvertItemRepositoryTest extends BaseTest
 
         $this->assertSame(2, $ad_items->count());
 
-        $ad_items = $this->AdvertItemRepository->getItemsByCode('test', 1);
+        $ad_items = $this->AdvertItemRepository->getItemsByCode('test',['items'],1);
+
+        $this->assertSame('iBrand\Component\Advert\Test\GoodsItems', get_class($ad_items->first()->associate->items->first()));
+
+        $this->assertSame('item_name_2', $ad_items->first()->associate->items[0]->item_name);
 
         $this->assertSame(1, $ad_items->count());
 

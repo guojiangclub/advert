@@ -48,6 +48,8 @@ abstract class BaseTest extends TestCase
         $this->seedAdItems();
 
         $this->seedGoods();
+
+        $this->seedGoodsItem();
     }
 
     /**
@@ -207,6 +209,15 @@ abstract class BaseTest extends TestCase
     {
         Goods::create(['name' => 'goods1']);
         Goods::create(['name' => 'goods2']);
+    }
+
+    /**
+     * seed some seedGoods.
+     */
+    public function seedGoodsItem()
+    {
+        GoodsItems::create(['item_name' => 'item_name_2','goods_id'=>2]);
+
     }
 
     /**

@@ -47,10 +47,10 @@ class AdvertItemRepositoryEloquent extends BaseRepository implements AdvertItemR
     }
 
 
-    public function getItemsByCode($code, $depth = 0, $status = 1)
+    public function getItemsByCode($code,$associate_with = [],$depth = 0, $status = 1)
     {
 
-        $advert= $this->whereHas('advert', function ($query) use ($code) {
+        $advert = $this->whereHas('advert', function ($query) use ($code) {
             return $query->where('code', $code)->where('status', $this->model()::STATUS_OPEN);
         })->first();
 
@@ -58,8 +58,18 @@ class AdvertItemRepositoryEloquent extends BaseRepository implements AdvertItemR
             return null;
         }
 
-        $query = $this->model->with('associate')
-            ->where('advert_id', $advert->advert_id)
+        $query = $this->model->with('associate');
+
+        if (count($associate_with)>0) {
+
+            foreach ($associate_with as $with){
+
+                $query = $query->with('associate.'.$with);
+            }
+
+        }
+
+        $query = $query->where('advert_id', $advert->advert_id)
             ->where('status', $status)
             ->orderBy('sort');
 
