@@ -50,8 +50,8 @@ class AdvertItemRepositoryEloquent extends BaseRepository implements AdvertItemR
     public function getItemsByCode($code,$associate_with = [],$depth = 0, $status = 1)
     {
 
-        $advert = $this->whereHas('advert', function ($query) use ($code) {
-            return $query->where('code', $code)->where('status', $this->model()::STATUS_OPEN);
+        $advert = $this->whereHas('advert', function ($query) use ($code,$status) {
+            return $query->where('code', $code)->where('status', $status);
         })->first();
 
         if (!$advert) {
