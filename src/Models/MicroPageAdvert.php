@@ -32,6 +32,6 @@ class MicroPageAdvert extends Model
 
     public function advert(){
 
-        $this->hasMany(Advert::class,'advert_id','id');
+        return $this->belongsTo(Advert::class,'advert_id');
     }
 }

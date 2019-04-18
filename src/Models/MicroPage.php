@@ -32,7 +32,7 @@ class MicroPage extends Model
 
     public function micro_page_advert(){
 
-        $this->hasMany(MicroPageAdvert::class,'micro_page_id','id');
+         return $this->hasMany(MicroPageAdvert::class,'micro_page_id');
     }
 
 }
