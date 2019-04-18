@@ -56,4 +56,12 @@ class AdvertItem extends Model
 
     }
 
+    public function getMetaAttribute($value)
+    {
+        if (!empty($value)) {
+            return json_decode($value,true);
+        }
+        return $value;
+    }
+
 }
