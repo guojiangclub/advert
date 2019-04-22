@@ -43,6 +43,7 @@ class CreateAdvertTables extends Migration
                 $table->string('name');
                 $table->string('code')->unique();//编码
                 $table->string('type')->default('default');// 默认页面  home 首页
+                $table->integer('page_type')->default(1);
                 $table->string('link')->nullable();//推广链接
                 $table->string('link_image')->nullable();
                 $table->timestamps();
