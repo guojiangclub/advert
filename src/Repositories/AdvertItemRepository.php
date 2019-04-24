@@ -15,7 +15,7 @@ use Prettus\Repository\Contracts\RepositoryInterface;
 
 interface AdvertItemRepository extends RepositoryInterface
 {
-    public function getItemsByCode($code, $depth = 0, $status = 1);
+    public function getItemsByCode($code,$associate_with = [],$depth = 0, $status = 1);
 
     public function create(array $attributes, $parentId = 0);
 
