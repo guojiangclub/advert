@@ -33,6 +33,8 @@ class CreateAdvertTables extends Migration
                 $table->string('code')->unique();//编码
                 $table->string('name');
                 $table->tinyInteger('status')->default(1);//状态：1 有效 ，0 失效
+                $table->string('title')->nullable();//前端显示标题
+                $table->tinyInteger('is_show_title')->default(0);//前端是否显示标题
                 $table->timestamps();
                 $table->softDeletes();
             });
